@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bmicalculator;
+package UI;
 
+import Data.BMIData;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -20,10 +21,19 @@ public class BMIGUI extends javax.swing.JFrame implements Observer{
     
     BMIData bmidata;
     
+    
     public BMIGUI() {
         initComponents();
         bmidata = new BMIData();
         bmidata.addObserver(this);
+        btnGroupH.add(rBtnhM);
+        btnGroupH.add(rBtnhInches);
+        btnGroupW.add(rBtnwKg);
+        btnGroupW.add(rBtnwLbs);
+        rBtnhM.setSelected(true);
+        rBtnwKg.setSelected(true);
+        
+        
     }
 
     /**
@@ -35,19 +45,25 @@ public class BMIGUI extends javax.swing.JFrame implements Observer{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroupW = new javax.swing.ButtonGroup();
+        btnGroupH = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tfWeightInKg = new javax.swing.JTextField();
         tfHeightInMetres = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        rBtnwKg = new javax.swing.JRadioButton();
+        rBtnwLbs = new javax.swing.JRadioButton();
+        rBtnhM = new javax.swing.JRadioButton();
+        rBtnhInches = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 255));
 
         jLabel1.setText("Weight in Kilograms");
 
-        jLabel2.setText("Height in Metres");
+        jLabel2.setText("Height");
 
         jButton1.setText("Get BMI");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -56,6 +72,19 @@ public class BMIGUI extends javax.swing.JFrame implements Observer{
             }
         });
 
+        rBtnwKg.setText("kg");
+
+        rBtnwLbs.setText("lbs");
+
+        rBtnhM.setText("m");
+        rBtnhM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rBtnhMActionPerformed(evt);
+            }
+        });
+
+        rBtnhInches.setText("inches");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -63,17 +92,32 @@ public class BMIGUI extends javax.swing.JFrame implements Observer{
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfWeightInKg)
-                            .addComponent(tfHeightInMetres, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(100, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tfHeightInMetres, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(rBtnhM, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(rBtnhInches, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tfWeightInKg, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(rBtnwKg, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(rBtnwLbs, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(100, 100, 100)))
+                .addContainerGap(116, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(141, 141, 141))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,16 +125,20 @@ public class BMIGUI extends javax.swing.JFrame implements Observer{
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tfWeightInKg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfWeightInKg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rBtnwKg)
+                    .addComponent(rBtnwLbs))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(tfHeightInMetres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addComponent(tfHeightInMetres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rBtnhM)
+                    .addComponent(rBtnhInches))
+                .addGap(43, 43, 43)
                 .addComponent(jButton1)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         pack();
@@ -99,10 +147,16 @@ public class BMIGUI extends javax.swing.JFrame implements Observer{
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        bmidata.setFlWeightInKg(Float.parseFloat(tfWeightInKg.getText()));
-        bmidata.setFlHeightInMetres(Float.parseFloat(tfHeightInMetres.getText()));
+        bmidata.setHeightWeightAndUnits(tfHeightInMetres.getText(),
+                                        tfWeightInKg.getText(),        
+                                        rBtnhM.isSelected(),
+                                        rBtnwKg.isSelected());
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void rBtnhMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBtnhMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rBtnhMActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,10 +194,16 @@ public class BMIGUI extends javax.swing.JFrame implements Observer{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup btnGroupH;
+    private javax.swing.ButtonGroup btnGroupW;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JRadioButton rBtnhInches;
+    private javax.swing.JRadioButton rBtnhM;
+    private javax.swing.JRadioButton rBtnwKg;
+    private javax.swing.JRadioButton rBtnwLbs;
     private javax.swing.JTextField tfHeightInMetres;
     private javax.swing.JTextField tfWeightInKg;
     // End of variables declaration//GEN-END:variables
