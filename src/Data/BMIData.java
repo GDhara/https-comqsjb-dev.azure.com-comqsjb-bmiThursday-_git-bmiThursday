@@ -32,12 +32,20 @@ public class BMIData extends Observable {
     
     public void setHeightWeightAndUnits(String h, String w, boolean useM, boolean useKg)
     {
+        try
+        {
         float height = Float.parseFloat(h);
         float weight = Float.parseFloat(w);
         if (!useM) height = inchesToMetres(height);
         if (!useKg) weight = lbsToKg(weight);
         setFlHeightInMetres(height);
         setFlWeightInKg(weight);
+        }
+        catch (Exception e)
+        {
+         setChanged();
+         notifyObservers("Invalid numbers");   
+        }
         
         
     }
@@ -47,7 +55,7 @@ public class BMIData extends Observable {
         if (flHeightInMetres==0) return;
         flResult = flWeightInKg/(flHeightInMetres*flHeightInMetres);
         setChanged();
-        notifyObservers(flResult);
+        notifyObservers("BMI " + flResult);
     }
 
     /**
@@ -86,8 +94,15 @@ public class BMIData extends Observable {
     public void setFlResult(float flResult) {
         this.flResult = flResult;
     }
-    private float flHeightInMetres;
-    private float flWeightInKg;
-    private float flResult;
-    private String strResult;
+    
+    
+    public String toString()
+    {
+        strResult = String.format("W: %.0f; H: %.0f; BMI: %.1f", flWeightInKg, flHeightInMetres, flResult);
+        return strResult;
+    }
+    private float flHeightInMetres=0.0f;
+    private float flWeightInKg=0.0f;
+    private float flResult=0.0f;
+    private String strResult="";
 }
