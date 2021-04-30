@@ -14,6 +14,34 @@ import java.util.Observable;
 public class BMIData extends Observable {
 
     /**
+     * @return the useM
+     */
+    public boolean isUseM() {
+        return useM;
+    }
+
+    /**
+     * @param useM the useM to set
+     */
+    public void setUseM(boolean useM) {
+        this.useM = useM;
+    }
+
+    /**
+     * @return the useKg
+     */
+    public boolean isUseKg() {
+        return useKg;
+    }
+
+    /**
+     * @param useKg the useKg to set
+     */
+    public void setUseKg(boolean useKg) {
+        this.useKg = useKg;
+    }
+
+    /**
      * @return the flHeightInMetres
      */
     public float getFlHeightInMetres() {
@@ -36,6 +64,8 @@ public class BMIData extends Observable {
         {
         float height = Float.parseFloat(h);
         float weight = Float.parseFloat(w);
+        this.useM = useM;
+        this.useKg = useKg;
         if (!useM) height = inchesToMetres(height);
         if (!useKg) weight = lbsToKg(weight);
         setFlHeightInMetres(height);
@@ -98,11 +128,14 @@ public class BMIData extends Observable {
     
     public String toString()
     {
-        strResult = String.format("W: %.0f; H: %.0f; BMI: %.1f", flWeightInKg, flHeightInMetres, flResult);
+        strResult = String.format("W: %.0f; H: %.1f; BMI: %.1f", flWeightInKg, flHeightInMetres, flResult);
         return strResult;
     }
     private float flHeightInMetres=0.0f;
     private float flWeightInKg=0.0f;
     private float flResult=0.0f;
     private String strResult="";
+    
+    private boolean useM;
+    private boolean useKg;
 }
